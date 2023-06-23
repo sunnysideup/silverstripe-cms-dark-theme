@@ -3,3 +3,11 @@ Name: cms-dark-theme
 After:
   - '#coreconfig'
 ---
+
+SilverStripe\Security\Member:
+  extensions:
+    - Sunnysideup\CMSDarkTheme\Extensions\DarkThemePreference
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Sunnysideup\CMSDarkTheme\Extensions\DarkThemePreference
