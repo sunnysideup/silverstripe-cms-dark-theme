@@ -1,5 +1,5 @@
 ---
-Name: cm-dark-theme
+Name: cms-dark-theme
 After:
   - '#coreconfig'
 ---

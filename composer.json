@@ -1,5 +1,5 @@
 {
-  "name": "sunnysideup/cm-dark-theme",
+  "name": "sunnysideup/cms-dark-theme",
   "type": "silverstripe-vendormodule",
   "description": "Adds the option to run the SilverStripe CMS in Dark Mode.",
   "keywords": [

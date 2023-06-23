@@ -1,11 +1,11 @@
-# Silverstripe cm-dark-theme module
-[![Build Status](https://travis-ci.org/sunnysideup/silverstripe-cm-dark-theme.svg?branch=master)](https://travis-ci.org/sunnysideup/silverstripe-cm-dark-theme)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sunnysideup/silverstripe-cm-dark-theme/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sunnysideup/silverstripe-cm-dark-theme/?branch=master)
-[![codecov.io](https://codecov.io/github/sunnysideup/silverstripe-cm-dark-theme/coverage.svg?branch=master)](https://codecov.io/github/sunnysideup/silverstripe-cm-dark-theme?branch=master)
+# Silverstripe cms-dark-theme module
+[![Build Status](https://travis-ci.org/sunnysideup/silverstripe-cms-dark-theme.svg?branch=master)](https://travis-ci.org/sunnysideup/silverstripe-cms-dark-theme)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sunnysideup/silverstripe-cms-dark-theme/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sunnysideup/silverstripe-cms-dark-theme/?branch=master)
+[![codecov.io](https://codecov.io/github/sunnysideup/silverstripe-cms-dark-theme/coverage.svg?branch=master)](https://codecov.io/github/sunnysideup/silverstripe-cms-dark-theme?branch=master)
 
-[![Latest Stable Version](https://poser.pugx.org/sunnysideup/cm-dark-theme/version)](https://packagist.org/packages/sunnysideup/cm-dark-theme)
-[![License](https://poser.pugx.org/sunnysideup/cm-dark-theme/license)](https://packagist.org/packages/sunnysideup/cm-dark-theme)
-[![Monthly Downloads](https://poser.pugx.org/sunnysideup/cm-dark-theme/d/monthly)](https://packagist.org/packages/sunnysideup/cm-dark-theme)
+[![Latest Stable Version](https://poser.pugx.org/sunnysideup/cms-dark-theme/version)](https://packagist.org/packages/sunnysideup/cms-dark-theme)
+[![License](https://poser.pugx.org/sunnysideup/cms-dark-theme/license)](https://packagist.org/packages/sunnysideup/cms-dark-theme)
+[![Monthly Downloads](https://poser.pugx.org/sunnysideup/cms-dark-theme/d/monthly)](https://packagist.org/packages/sunnysideup/cms-dark-theme)
 
 
 ## Documentation
@@ -14,7 +14,7 @@
 
  * [Developer Docs](docs/en/INDEX.md)
  * [User Guide](docs/en/userguide.md)
- * [API Docs](http://docs.ssmods.com/sunnysideup/cm-dark-theme/classes.xhtml)
+ * [API Docs](http://docs.ssmods.com/sunnysideup/cms-dark-theme/classes.xhtml)
 
 
 ## Requirements
@@ -35,19 +35,19 @@ See [composer.json](composer.json) for details
 
 
 ```
-composer require sunnysideup/cm-dark-theme
+composer require sunnysideup/cms-dark-theme
 ```
 
 ### Configuration
 
 
 
-In the `_config` folder you will find the `cm-dark-theme.yml.example`
+In the `_config` folder you will find the `cms-dark-theme.yml.example`
 file that shows options for the configuration of this module.
 
 We recommend that you:
 
-  1. copy these `cm-dark-theme.yml.example` files into your
+  1. copy these `cms-dark-theme.yml.example` files into your
 `app/_config` folder (where available - otherwise search for `private static $` in the module to see what can be configured)
   2. remove the .example extension,
   3. delete the lines you do not care about, and
