@@ -84,8 +84,8 @@ class LeftAndMainDarkTheme extends LeftAndMain
             html {
                 filter: invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg);
             }
-            img {
-                filter: invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg);
+            img, .gallery-item__thumbnail, iframe[name="cms-preview-iframe"] {
+                filter: invert(1) contrast(calc(1/0.95)) saturate(calc(1/.5)) hue-rotate(-180deg);
             }
             ';
         };
