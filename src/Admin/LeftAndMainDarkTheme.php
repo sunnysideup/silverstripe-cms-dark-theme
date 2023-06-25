@@ -71,7 +71,7 @@ class LeftAndMainDarkTheme extends LeftAndMain
         } else {
             self::set_mode('Dark', $this);
         }
-        return $this->redirect('/admin/myprofile#Root_Display');
+        return $this->redirect('/admin/myprofile#Root_Cms');
     }
 
 
@@ -115,7 +115,7 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     public static function menu_title($class = null, $localise = true): string
     {
-        return  self::is_dark_mode() ? 'Use Light Mode' : 'Use Dark Mode';
+        return  self::is_dark_mode() ? '🌖 Use Light Mode' : '🌘 Use Dark Mode';
     }
 
     protected static function generate_js($controller = null): string
@@ -124,14 +124,14 @@ class LeftAndMainDarkTheme extends LeftAndMain
         $isDarkMode = self::is_dark_mode();
         $js = '';
         $modifier =  $isDarkMode ? 'setlightmode' : 'setdarkmode';
-        $innerText = $isDarkMode ? 'Use Light Mode' : 'Use Dark Mode';
+        $innerText = self::menu_title();
         $js .= <<<js
-        const el = document.getElementById("Menu-Sunnysideup-CMSDarkTheme-Admin-LeftAndMainDarkTheme");
+        const el = document.querySelector(".cms-help__links a[href='/admin/darkmode/']");
 
         // Set the new href value to the element
-        const a = el.querySelector('a')
-        a.setAttribute("href", a.getAttribute("href") + "$modifier");
-        a.querySelector('span.text').innerText = "$innerText";
+        // el.setAttribute("href", el.getAttribute("href") + "$modifier");
+        el.innerText = "$innerText";
+        el.target = "self";
 
 js;
         return $js;

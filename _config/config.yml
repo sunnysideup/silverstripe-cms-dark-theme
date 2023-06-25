@@ -11,3 +11,8 @@ SilverStripe\Security\Member:
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - Sunnysideup\CMSDarkTheme\Extensions\DarkThemePreference
+
+
+SilverStripe\Admin\LeftAndMain:
+  help_links:
+    'Switch Display Mode': '/admin/darkmode/'
