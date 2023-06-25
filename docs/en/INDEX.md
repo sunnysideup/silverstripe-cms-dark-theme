@@ -2,16 +2,19 @@ CMS Dark Theme
 ===============================================
 # how it works
 
-There are three settings:
+Whether the user gets to see the Light or Dark theme in the CMS, depends on three settings (each of which, if set, overrules the previous one):
 
-1. let browser decide
-2. _site config_ default setting for all users
-3. _user_ specific settting
+1. browser default
+2. _site config_ default setting for all users - see `admin/settings`
+3. _user_ specific settting - see `/admin/myprofile`
 
-If (3) is not set, it will look at (2) and then look at (1). The user can set their own setting in their profile (`/admin/myprofile`). 
+There is also the option in the bottom-left-hand _Silverstripe Logo_ help menu to switch. 
 
-On the left menu in the CMS, the option will show to switch until the user has made a decision. 
+Direct links are:
 
+- `admin/displaymode/switch`
+- `admin/displaymode/setdarkmode`
+- `admin/displaymode/setlightmode`
 
 # examples (out of date, but gives you some idea)
 ![basic-example](/docs/en/images/example.png)
