@@ -33,7 +33,7 @@ class LeftAndMainDarkTheme extends LeftAndMain
     // so that Director does not think they are actions of CMSMain
     private static $url_priority = 999;
 
-    private static $menu_title = 'Dark Mode';
+    private static $menu_title = 'Select Display Mode';
 
     private static $menu_icon_class = 'font-icon-monitor';
 
