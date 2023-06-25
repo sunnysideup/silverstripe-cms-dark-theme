@@ -5,11 +5,12 @@ namespace Sunnysideup\CMSDarkTheme\Extensions;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\OptionsetField;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\View\Requirements;
 
 class DarkThemePreference extends DataExtension
 {
     private static $db = [
-        'DarkModeSetting' => 'Enum("Not set, Dark, Light", "Not set")',
+        'DarkModeSetting' => 'Enum("Use browser setting, Dark, Light", "Use browser setting")',
     ];
 
     private static $field_labels = [
@@ -26,8 +27,11 @@ class DarkThemePreference extends DataExtension
                     $fieldLabels['DarkModeSetting'] ?? self::$field_labels['DarkModeSetting'],
                     $this->getOwner()->dbObject('DarkModeSetting')->enumValues()
                 )
-                    ->setDescription('Using a dark mode reduces your electricity use.')
+                    ->setDescription('Using a dark mode may reduce your electricity use. Please reload browser window if this does not immediately works.')
             ]
         );
     }
+
+
+
 }

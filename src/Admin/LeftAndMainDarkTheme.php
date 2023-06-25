@@ -5,6 +5,7 @@ namespace Sunnysideup\CMSDarkTheme\Admin;
 use SilverStripe\Admin\AdminRootController;
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Control\Controller;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Security\Security;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\Requirements;
@@ -12,7 +13,19 @@ use SilverStripe\View\Requirements;
 class LeftAndMainDarkTheme extends LeftAndMain
 {
     public const CUSTOM_CODE = 'DarkModeCustomCssAndJs';
+
     private static $url_segment = 'darkmode';
+
+    private static $make_dark_css = '
+        html {
+            filter: invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg);
+        }
+        img,
+        .gallery-item__thumbnail,
+        iframe[name="cms-preview-iframe"] {
+            filter: invert(1) contrast(calc(1/0.95)) saturate(calc(1/0.5)) hue-rotate(-180deg);
+        }
+    ';
 
     private static $url_rule = '/$Action/$ID/$OtherID';
 
@@ -52,7 +65,12 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     public function index($request)
     {
-        return parent::index($request);
+        if (self::is_dark_mode($this)) {
+            self::set_mode('Light', $this);
+        } else {
+            self::set_mode('Dark', $this);
+        }
+        return $this->redirect('/admin/myprofile#Root_Display');
     }
 
 
@@ -78,21 +96,23 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     protected static function generate_css($controller = null): string
     {
-        $css = ' {display: none;}';
-        if(self::is_dark_mode($controller)) {
-            $css .= '
-            html {
-                filter: invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg);
-            }
-            img, .gallery-item__thumbnail, iframe[name="cms-preview-iframe"] {
-                filter: invert(1) contrast(calc(1/0.95)) saturate(calc(1/.5)) hue-rotate(-180deg);
-            }
-            ';
-        };
-        if(self::get_is_dark_mode_set_in_database($controller)) {
+        $makeDarkCss = Config::inst()->get(static::class, 'make_dark_css');
+        // use browser setting.
+        $css = '';
+        if(self::get_is_dark_mode_set_in_database($controller) === false) {
             $css .= '#Menu-Sunnysideup-CMSDarkTheme-Admin-LeftAndMainDarkTheme {display: none;}';
-        }
+            $css .= '@media (prefers-color-scheme: dark) {'.$makeDarkCss.'}';
+        } elseif(self::is_dark_mode($controller)) {
+            $css .= $makeDarkCss;
+        };
+
         return $css;
+    }
+
+    public static function menu_title($class = null, $localise = true): string
+    {
+        self::generate_js();
+        return  self::is_dark_mode() ? 'Use Light Mode' : 'Use Dark Mode';
     }
 
     protected static function generate_js($controller = null): string
@@ -123,7 +143,8 @@ js;
      */
     public function setlightmode($request)
     {
-        return self::set_mode('Light', $this);
+        self::set_mode('Light', $this);
+        return $this->redirectBack();
     }
 
     /**
@@ -132,7 +153,8 @@ js;
      */
     public function setdarkmode()
     {
-        return self::set_mode('Dark', $this);
+        self::set_mode('Dark', $this);
+        return $this->redirectBack();
     }
 
     protected static function is_dark_mode($controller = null): bool
@@ -153,7 +175,6 @@ js;
             $member->DarkModeSetting = $mode;
             $member->write();
         }
-        return $controller->redirectBack();
     }
 
     protected static $isDarkModeCache = null;
