@@ -58,7 +58,7 @@ class LeftAndMainDarkTheme extends Extension
         // Set the new href value to the element
         // el.setAttribute("href", el.getAttribute("href") + "$modifier");
         el.innerText = "$innerText";
-        el.target = "self";
+        el.target = "_parent";
 
 js;
         return $js;
