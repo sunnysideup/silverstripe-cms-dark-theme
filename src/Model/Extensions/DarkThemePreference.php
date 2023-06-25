@@ -2,13 +2,9 @@
 
 namespace Sunnysideup\CMSDarkTheme\Model\Extensions;
 
-use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\OptionsetField;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\Security\Member;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\View\Requirements;
 
 class DarkThemePreference extends DataExtension
 {

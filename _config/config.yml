@@ -4,15 +4,19 @@ After:
   - '#coreconfig'
 ---
 
+# add to member
 SilverStripe\Security\Member:
   extensions:
-    - Sunnysideup\CMSDarkTheme\Extensions\DarkThemePreference
+    - Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference
 
+# add to site config
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
-    - Sunnysideup\CMSDarkTheme\Extensions\DarkThemePreference
+    - Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference
 
-
+# add to left and main
 SilverStripe\Admin\LeftAndMain:
   help_links:
-    'Switch Display Mode': '/admin/darkmode/'
+    'Switch Display Mode': '/admin/displaymode/'
+  extensions:
+    - Sunnysideup\CMSDarkTheme\Admin\Extensions\LeftAndMainDarkTheme

@@ -2,16 +2,9 @@
 
 namespace Sunnysideup\CMSDarkTheme\Control;
 
-use SilverStripe\Admin\AdminRootController;
-use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Extension;
-use SilverStripe\Security\Security;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\View\Requirements;
 use Sunnysideup\CMSDarkTheme\Api\LeftAndMainDarkThemeApi;
 
 class LeftAndMainDarkThemeToggle extends Controller
@@ -27,6 +20,17 @@ class LeftAndMainDarkThemeToggle extends Controller
         'setlightmode',
         'setdarkmode',
     ];
+
+    /**
+     * set mode and then
+     *
+     * @param HTTPRequest $request
+     * @return HTTPResponse
+     */
+    public function index($request)
+    {
+        return $this->switch($request);
+    }
 
     /**
      * set mode and then

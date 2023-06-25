@@ -14,6 +14,9 @@ On the left menu in the CMS, the option will show to switch until the user has m
 
 
 # examples (out of date, but gives you some idea)
+![basic-example](images/example.png)
+
+## impressions from Elliot Sawyer
 ![dark-mode-before](https://github.com/elliot-sawyer/silverstripe-cms-dark-theme/assets/354793/c079b299-a806-4816-911a-2e1e8a893558)
 ![dark-mode-after](https://github.com/elliot-sawyer/silverstripe-cms-dark-theme/assets/354793/b7f073a8-8a98-42fc-a837-d3b045e81070)
 ![dark-mode-settings](https://github.com/elliot-sawyer/silverstripe-cms-dark-theme/assets/354793/b618de71-e17f-4571-a0e2-760b064b9a76)

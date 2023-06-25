@@ -1,0 +1,8 @@
+---
+Name: cms-dark-theme-routes
+Before:
+   - '#adminroutes'
+---
+SilverStripe\Control\Director:
+  rules:
+    'admin/displaymode//$Action/$ID/$OtherID': 'Sunnysideup\CMSDarkTheme\Control\LeftAndMainDarkThemeToggle'

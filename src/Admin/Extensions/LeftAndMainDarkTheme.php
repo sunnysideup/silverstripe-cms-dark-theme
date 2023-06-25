@@ -53,7 +53,7 @@ class LeftAndMainDarkTheme extends Extension
         $modifier =  $isDarkMode ? 'setlightmode' : 'setdarkmode';
         $innerText = LeftAndMainDarkThemeApi::get_display_mode_menu_title();
         $js .= <<<js
-        const el = document.querySelector(".cms-help__links a[href='/admin/displaymode/switch/']");
+        const el = document.querySelector(".cms-help__links a[href='/admin/displaymode/']");
 
         // Set the new href value to the element
         // el.setAttribute("href", el.getAttribute("href") + "$modifier");
