@@ -14,7 +14,7 @@ On the left menu in the CMS, the option will show to switch until the user has m
 
 
 # examples (out of date, but gives you some idea)
-![basic-example](images/example.png)
+![basic-example](/docs/en/images/example.png)
 
 ## impressions from Elliot Sawyer
 ![dark-mode-before](https://github.com/elliot-sawyer/silverstripe-cms-dark-theme/assets/354793/c079b299-a806-4816-911a-2e1e8a893558)
