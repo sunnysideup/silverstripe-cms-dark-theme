@@ -66,7 +66,7 @@ class LeftAndMainDarkTheme extends LeftAndMain
      */
     public function index($request)
     {
-        if (self::is_dark_mode($this)) {
+        if (self::is_dark_mode()) {
             self::set_mode('Light', $this);
         } else {
             self::set_mode('Dark', $this);
@@ -87,7 +87,7 @@ class LeftAndMainDarkTheme extends LeftAndMain
         Requirements::customCSS(self::generate_css($this), self::CUSTOM_CODE);
         Requirements::customScript(self::generate_js($this), self::CUSTOM_CODE);
         if(!$action) {
-            if(self::is_dark_mode($this)) {
+            if(self::is_dark_mode()) {
                 $action = 'setlightmode';
             } else {
                 $action = 'setdarkmode';
@@ -101,10 +101,12 @@ class LeftAndMainDarkTheme extends LeftAndMain
         $makeDarkCss = Config::inst()->get(static::class, 'make_dark_css');
         // use browser setting.
         $css = '';
-        if(self::get_is_dark_mode_set_in_database($controller) === false) {
+        if(self::get_hide_menu_item()) {
             $css .= '#Menu-Sunnysideup-CMSDarkTheme-Admin-LeftAndMainDarkTheme {display: none;}';
+        }
+        if(self::get_is_dark_mode_set_in_database() === false) {
             $css .= '@media (prefers-color-scheme: dark) {'.$makeDarkCss.'}';
-        } elseif(self::is_dark_mode($controller)) {
+        } elseif(self::is_dark_mode()) {
             $css .= $makeDarkCss;
         };
 
@@ -113,55 +115,43 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     public static function menu_title($class = null, $localise = true): string
     {
-        self::generate_js();
         return  self::is_dark_mode() ? 'Use Light Mode' : 'Use Dark Mode';
     }
 
     protected static function generate_js($controller = null): string
     {
         // set vars!
-        $isDarkMode = self::is_dark_mode($controller);
+        $isDarkMode = self::is_dark_mode();
         $js = '';
-        if(! self::get_is_dark_mode_set_in_database($controller)) {
-            $modifier =  $isDarkMode ? 'setlightmode' : 'setdarkmode';
-            $innerText = $isDarkMode ? 'Use Light Mode' : 'Use Dark Mode';
-            $js .= <<<js
-            const el = document.getElementById("Menu-Sunnysideup-CMSDarkTheme-Admin-LeftAndMainDarkTheme");
+        $modifier =  $isDarkMode ? 'setlightmode' : 'setdarkmode';
+        $innerText = $isDarkMode ? 'Use Light Mode' : 'Use Dark Mode';
+        $js .= <<<js
+        const el = document.getElementById("Menu-Sunnysideup-CMSDarkTheme-Admin-LeftAndMainDarkTheme");
 
-            // Set the new href value to the element
-            const a = el.querySelector('a')
-            a.setAttribute("href", a.getAttribute("href") + "$modifier");
-            a.querySelector('span.text').innerText = "$innerText";
+        // Set the new href value to the element
+        const a = el.querySelector('a')
+        a.setAttribute("href", a.getAttribute("href") + "$modifier");
+        a.querySelector('span.text').innerText = "$innerText";
 
 js;
-        }
         return $js;
     }
 
-
-
-    /**
-     *
-     */
     public function setlightmode($request): HTTPResponse
     {
         self::set_mode('Light', $this);
         return $this->redirectBack();
     }
 
-    /**
-     *
-     * @return DBHTMLText HTML response with the rendered treeview
-     */
-    public function setdarkmode(): HTTPResponse
+    public function setdarkmode($request): HTTPResponse
     {
         self::set_mode('Dark', $this);
         return $this->redirectBack();
     }
 
-    protected static function is_dark_mode($controller = null): bool
+    protected static function is_dark_mode(): bool
     {
-        return self::get_mode($controller) === 'Dark' ? true : false;
+        return self::get_mode() === 'Dark' ? true : false;
     }
 
     protected static function set_mode(string $mode, $controller = null): void
@@ -183,15 +173,24 @@ js;
 
     protected static $darkModeValueCache = null;
 
-    protected static function get_mode($controller = null): string
+    /**
+     * has any value been set in the database?
+     *
+     * @var boolean
+     */
+    protected static $darkModeSetInDatabaseCache = false;
+
+    protected static function get_mode(): string
     {
         if(self::$darkModeValueCache === null) {
             $member = Security::getCurrentUser();
             if(self::is_valid_setting((string) $member->DarkModeSetting)) {
+                self::$darkModeSetInDatabaseCache = true;
                 self::$darkModeValueCache = (string) $member->DarkModeSetting;
             }
             $config = SiteConfig::current_site_config();
             if(self::is_valid_setting((string) $config->DarkModeSetting)) {
+                self::$darkModeSetInDatabaseCache = true;
                 if(! self::$darkModeValueCache) {
                     self::$darkModeValueCache = (string) $config->DarkModeSetting;
                 }
@@ -202,7 +201,18 @@ js;
         }
         return (string) self::$darkModeValueCache;
     }
-    protected static function get_is_dark_mode_set_in_database($controller = null): bool
+
+    /**
+     * has any relevant value been set in the database?
+     *
+     * @var boolean
+     */
+    protected static function get_is_dark_mode_set_in_database(): bool
+    {
+        return self::$darkModeSetInDatabaseCache;
+    }
+
+    protected static function get_hide_menu_item(): bool
     {
         $member = Security::getCurrentUser();
         if($member->HideDarkModeSettingOptionFromMenu) {
