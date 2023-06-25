@@ -52,7 +52,7 @@ class DarkThemePreference extends DataExtension
                         ->setDescription('Using a dark mode may reduce your electricity use. Please reload browser window to see change.'),
                     CheckboxField::create('HideDarkModeSettingOptionFromMenu', 'Hide option from menu')
                         ->setDescription('
-                            By ticking this box, you no longer have the option to change it from the left-hand-side menu in the CMS.
+                            By ticking this box, you no longer have the option to change your preference from the left-hand-side menu in the CMS (but you can still change it here).
                         ')
                 ]
             );
