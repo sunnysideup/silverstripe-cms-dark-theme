@@ -5,6 +5,8 @@ namespace Sunnysideup\CMSDarkTheme\Admin;
 use SilverStripe\Admin\AdminRootController;
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Security\Security;
 use SilverStripe\SiteConfig\SiteConfig;
@@ -29,8 +31,6 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     private static $url_rule = '/$Action/$ID/$OtherID';
 
-    // Maintain a lower priority than other administration sections
-    // so that Director does not think they are actions of CMSMain
     private static $url_priority = 999;
 
     private static $menu_title = 'Select Display Mode';
@@ -41,20 +41,15 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     private static $menu_priority = -999;
 
-    private static $ignore_menuitem = false;
+    // private static $ignore_menuitem = false;
 
     private static $allowed_actions = [
         'setlightmode',
         'setdarkmode',
     ];
 
-    private static $casting = [
-        'FrontEndCode' => 'HTMLFragment',
-    ];
-
     protected function init()
     {
-        // set reading lang
         parent::init();
 
         // Requirements::javascript('silverstripe/cms: client/dist/js/SilverStripeNavigator.js');
@@ -63,6 +58,12 @@ class LeftAndMainDarkTheme extends LeftAndMain
 
     }
 
+    /**
+     * set mode and then
+     *
+     * @param HTTPRequest $request
+     * @return HTTPResponse
+     */
     public function index($request)
     {
         if (self::is_dark_mode($this)) {
@@ -74,8 +75,9 @@ class LeftAndMainDarkTheme extends LeftAndMain
     }
 
 
-
     /**
+     * HACK ALERT - we add the CSS / JS here as this seems the easiest place to add it
+     * even though it does not make any sense
      *
      * @param string|null $action Action to link to.
      * @return string
@@ -141,7 +143,7 @@ js;
     /**
      *
      */
-    public function setlightmode($request)
+    public function setlightmode($request): HTTPResponse
     {
         self::set_mode('Light', $this);
         return $this->redirectBack();
@@ -151,7 +153,7 @@ js;
      *
      * @return DBHTMLText HTML response with the rendered treeview
      */
-    public function setdarkmode()
+    public function setdarkmode(): HTTPResponse
     {
         self::set_mode('Dark', $this);
         return $this->redirectBack();
@@ -162,7 +164,7 @@ js;
         return self::get_mode($controller) === 'Dark' ? true : false;
     }
 
-    protected static function set_mode(string $mode, $controller = null)
+    protected static function set_mode(string $mode, $controller = null): void
     {
         if(! self::is_valid_setting((string) $mode)) {
             user_error('Setting must be Dark or Light');
@@ -174,39 +176,43 @@ js;
         if($member) {
             $member->DarkModeSetting = $mode;
             $member->write();
+        } else {
+            user_error('Could not set mode.');
         }
     }
 
-    protected static $isDarkModeCache = null;
-    protected static $isDarkModeCacheSetInDatabase = false;
+    protected static $darkModeValueCache = null;
 
     protected static function get_mode($controller = null): string
     {
-        if(self::$isDarkModeCache === null) {
+        if(self::$darkModeValueCache === null) {
             $member = Security::getCurrentUser();
             if(self::is_valid_setting((string) $member->DarkModeSetting)) {
-                self::$isDarkModeCacheSetInDatabase = true;
-                if(! self::$isDarkModeCache) {
-                    self::$isDarkModeCache = (string) $member->DarkModeSetting;
-                }
+                self::$darkModeValueCache = (string) $member->DarkModeSetting;
             }
             $config = SiteConfig::current_site_config();
             if(self::is_valid_setting((string) $config->DarkModeSetting)) {
-                if(! self::$isDarkModeCache) {
-                    self::$isDarkModeCache = (string) $config->DarkModeSetting;
+                if(! self::$darkModeValueCache) {
+                    self::$darkModeValueCache = (string) $config->DarkModeSetting;
                 }
             }
-            if(! self::is_valid_setting((string) self::$isDarkModeCache)) {
-                self::$isDarkModeCache = '';
+            if(! self::is_valid_setting((string) self::$darkModeValueCache)) {
+                self::$darkModeValueCache = '';
             }
         }
-        return (string) self::$isDarkModeCache;
+        return (string) self::$darkModeValueCache;
     }
     protected static function get_is_dark_mode_set_in_database($controller = null): bool
     {
-        // make sure we have checked it all out!
-        self::get_mode($controller);
-        return self::$isDarkModeCacheSetInDatabase;
+        $member = Security::getCurrentUser();
+        if($member->HideDarkModeSettingOptionFromMenu) {
+            return true;
+        }
+        $config = SiteConfig::current_site_config();
+        if($config->HideDarkModeSettingOptionFromMenu) {
+            return true;
+        }
+        return false;
     }
 
     protected static function is_valid_setting(string $mode): bool
