@@ -1,3 +1,3 @@
 # User guide
 
- - To be completed
+[See Developer notes](docs/en/INDEX.md)
