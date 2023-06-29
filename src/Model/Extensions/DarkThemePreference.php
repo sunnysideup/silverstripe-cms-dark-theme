@@ -6,6 +6,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\OptionsetField;
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference
+ *
+ * @property SiteConfig|Member|DarkThemePreference $owner
+ * @property string $DarkModeSetting
+ */
 class DarkThemePreference extends DataExtension
 {
     private static $db = [

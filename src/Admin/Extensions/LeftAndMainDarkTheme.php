@@ -9,6 +9,11 @@ use Sunnysideup\CMSDarkTheme\Api\LeftAndMainDarkThemeApi;
 
 // to do - turn into extension.
 
+/**
+ * Class \Sunnysideup\CMSDarkTheme\Admin\Extensions\LeftAndMainDarkTheme
+ *
+ * @property LeftAndMain|LeftAndMainDarkTheme $owner
+ */
 class LeftAndMainDarkTheme extends Extension
 {
     public const CUSTOM_CODE = 'DarkModeCustomCssAndJs';
