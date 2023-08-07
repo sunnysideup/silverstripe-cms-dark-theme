@@ -24,7 +24,8 @@ class LeftAndMainDarkTheme extends Extension
         }
         img,
         .gallery-item__thumbnail,
-        iframe[name="cms-preview-iframe"] {
+        iframe[name="cms-preview-iframe"],
+        .uploadfield-item__thumbnail {
             filter: invert(1) contrast(calc(1/0.95)) saturate(calc(1/0.5)) hue-rotate(-180deg);
         }
     ';
