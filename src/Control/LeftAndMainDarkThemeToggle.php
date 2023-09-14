@@ -7,10 +7,6 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use Sunnysideup\CMSDarkTheme\Api\LeftAndMainDarkThemeApi;
 
-/**
- * Class \Sunnysideup\CMSDarkTheme\Control\LeftAndMainDarkThemeToggle
- *
- */
 class LeftAndMainDarkThemeToggle extends Controller
 {
     private static $url_segment = 'admin/displaymode';
@@ -26,9 +22,10 @@ class LeftAndMainDarkThemeToggle extends Controller
     ];
 
     /**
-     * set mode and then
+     * set mode and then.
      *
      * @param HTTPRequest $request
+     *
      * @return HTTPResponse
      */
     public function index($request)
@@ -37,9 +34,10 @@ class LeftAndMainDarkThemeToggle extends Controller
     }
 
     /**
-     * set mode and then
+     * set mode and then.
      *
      * @param HTTPRequest $request
+     *
      * @return HTTPResponse
      */
     public function switch($request)
@@ -50,14 +48,15 @@ class LeftAndMainDarkThemeToggle extends Controller
         } else {
             LeftAndMainDarkThemeApi::set_display_mode('Dark');
         }
+
         return $owner->redirect('/admin/myprofile#Root_Cms');
     }
-
 
     public function setlightmode($request): HTTPResponse
     {
         $owner = $this->getOwner();
         LeftAndMainDarkThemeApi::set_display_mode('Light');
+
         return $owner->redirectBack();
     }
 
@@ -65,8 +64,7 @@ class LeftAndMainDarkThemeToggle extends Controller
     {
         $owner = $this->getOwner();
         LeftAndMainDarkThemeApi::set_display_mode('Dark');
+
         return $owner->redirectBack();
     }
-
-
 }

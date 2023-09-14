@@ -7,10 +7,10 @@ use SilverStripe\Forms\OptionsetField;
 use SilverStripe\ORM\DataExtension;
 
 /**
- * Class \Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference
+ * Class \Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference.
  *
- * @property SiteConfig|Member|DarkThemePreference $owner
- * @property string $DarkModeSetting
+ * @property DarkThemePreference|Member|SiteConfig $owner
+ * @property string                                $DarkModeSetting
  */
 class DarkThemePreference extends DataExtension
 {
@@ -21,6 +21,7 @@ class DarkThemePreference extends DataExtension
     private static $field_labels = [
         'DarkModeSetting' => 'Preferred Display Mode for CMS',
     ];
+
     public function updateCMSFields(FieldList $fields)
     {
         $fieldLabels = $this->getOwner()->fieldLabels();
@@ -36,7 +37,4 @@ class DarkThemePreference extends DataExtension
             ]
         );
     }
-
-
-
 }
