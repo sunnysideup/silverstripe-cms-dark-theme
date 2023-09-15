@@ -9,8 +9,8 @@ use SilverStripe\ORM\DataExtension;
 /**
  * Class \Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference.
  *
- * @property DarkThemePreference|Member|SiteConfig $owner
- * @property string                                $DarkModeSetting
+ * @property SiteConfig|Member|DarkThemePreference $owner
+ * @property string $DarkModeSetting
  */
 class DarkThemePreference extends DataExtension
 {
