@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\SiteConfig;
+namespace Sunnysideup\CMSDarkTheme\Control;
 
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
