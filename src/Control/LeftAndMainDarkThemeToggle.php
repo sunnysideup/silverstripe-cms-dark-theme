@@ -61,7 +61,7 @@ class LeftAndMainDarkThemeToggle extends Controller
         $owner = $this->getOwner();
         LeftAndMainDarkThemeApi::set_display_mode('Light');
 
-        return $owner->redirectBack();
+        return $owner->redirect('admin/myprofile#Root_Cms');
     }
 
     public function setdarkmode($request): HTTPResponse
@@ -69,6 +69,6 @@ class LeftAndMainDarkThemeToggle extends Controller
         $owner = $this->getOwner();
         LeftAndMainDarkThemeApi::set_display_mode('Dark');
 
-        return $owner->redirectBack();
+        return $owner->redirect('admin/myprofile#Root_Cms');
     }
 }

@@ -25,6 +25,7 @@ class LeftAndMainDarkTheme extends Extension
         img,
         .gallery-item__thumbnail,
         iframe[name="cms-preview-iframe"],
+        .cms-help__links,
         .uploadfield-item__thumbnail {
             filter: invert(1) contrast(calc(1/0.95)) saturate(calc(1/0.5)) hue-rotate(-180deg);
         }
@@ -33,12 +34,13 @@ class LeftAndMainDarkTheme extends Extension
     public function updateClientConfig(array $clientConfig)
     {
         Requirements::customCSS(self::generate_display_mode_css($this), self::CUSTOM_CODE);
-        Requirements::customScript(self::generate_display_mode_js($this), self::CUSTOM_CODE);
+        Requirements::customScript(self::generate_display_mode_js($this), self::CUSTOM_CODE . 'JS');
     }
 
     public static function get_display_mode_menu_title($class = null, $localise = true): string
     {
         return  LeftAndMainDarkThemeApi::is_dark_mode() ? '🌖 Use Light Mode' : '🌘 Use Dark Mode';
+        // '🌗 Use Browser Setting'
     }
 
     protected static function generate_display_mode_css(): string
@@ -61,13 +63,43 @@ class LeftAndMainDarkTheme extends Extension
         $js = '';
         $modifier = $isDarkMode ? 'setlightmode' : 'setdarkmode';
         $innerText = LeftAndMainDarkThemeApi::get_display_mode_menu_title();
+        $undetermined = "false";
+        if (false === LeftAndMainDarkThemeApi::get_is_dark_mode_set_in_database()) {
+            $undetermined = "true";
+        }
         $js .= <<<js
-        const el = document.querySelector(".cms-help__links a[href='/admin/displaymode/']");
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if the user prefers dark mode
+            const el = document.querySelector(".cms-help__links a[href='/admin/displaymode/']");
+            let hrefValue = ''
+            if(el) {
+                const el = document.querySelector(".cms-help__links a[href='/admin/displaymode/']");
+                hrefValue = el.getAttribute("href") + "{$modifier}"
+                // Set the new href value to the element
+                el.setAttribute("href", hrefValue);
+                el.innerText = "{$innerText}";
+                el.target = "_parent";
+            }
+            if ({$undetermined} && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 
-        // Set the new href value to the element
-        // el.setAttribute("href", el.getAttribute("href") + "{$modifier}");
-        el.innerText = "{$innerText}";
-        el.target = "_parent";
+                // Replace 'dark' with 'light' in the href attribute
+                hrefValue = el.getAttribute("href").replace('dark', 'light');
+                el.setAttribute("href", hrefValue);
+
+                // Update inner text
+                el.innerText = "🌖 use light mode";
+                el.target = "_parent";
+            }
+            el.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                // Fetch the URL without redirecting
+                fetch(hrefValue).then(() => {
+                    // Reload the page after the fetch completes
+                    window.location.reload();
+                });
+            });
+        });
 
 js;
 
