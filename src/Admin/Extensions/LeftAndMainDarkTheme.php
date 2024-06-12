@@ -33,13 +33,13 @@ class LeftAndMainDarkTheme extends Extension
 
     public function updateClientConfig(array $clientConfig)
     {
-        Requirements::customCSS(self::generate_display_mode_css($this), self::CUSTOM_CODE);
-        Requirements::customScript(self::generate_display_mode_js($this), self::CUSTOM_CODE . 'JS');
+        Requirements::customCSS(self::generate_display_mode_css(), self::CUSTOM_CODE);
+        Requirements::customScript(self::generate_display_mode_js(), self::CUSTOM_CODE . 'JS');
     }
 
     public static function get_display_mode_menu_title($class = null, $localise = true): string
     {
-        return  LeftAndMainDarkThemeApi::is_dark_mode() ? '🌖 Use Light Mode' : '🌘 Use Dark Mode';
+        return LeftAndMainDarkThemeApi::is_dark_mode() ? '🌖 Use Light Mode' : '🌘 Use Dark Mode';
         // '🌗 Use Browser Setting'
     }
 
@@ -63,11 +63,12 @@ class LeftAndMainDarkTheme extends Extension
         $js = '';
         $modifier = $isDarkMode ? 'setlightmode' : 'setdarkmode';
         $innerText = LeftAndMainDarkThemeApi::get_display_mode_menu_title();
-        $undetermined = "false";
+        $undetermined = 'false';
         if (false === LeftAndMainDarkThemeApi::get_is_dark_mode_set_in_database()) {
-            $undetermined = "true";
+            $undetermined = 'true';
         }
-        $js .= <<<js
+
+        return $js . <<<js
         document.addEventListener("DOMContentLoaded", function() {
             // Check if the user prefers dark mode
             const el = document.querySelector(".cms-help__links a[href='/admin/displaymode/']");
@@ -102,7 +103,5 @@ class LeftAndMainDarkTheme extends Extension
         });
 
 js;
-
-        return $js;
     }
 }

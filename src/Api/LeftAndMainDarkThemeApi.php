@@ -23,17 +23,17 @@ class LeftAndMainDarkThemeApi
 
     public static function get_display_mode_menu_title(): string
     {
-        return  self::is_dark_mode() ? '🌖 Use Light Mode' : '🌘 Use Dark Mode';
+        return self::is_dark_mode() ? '🌖 Use Light Mode' : '🌘 Use Dark Mode';
     }
 
     public static function is_dark_mode(): bool
     {
-        return 'Dark' === self::get_display_mode() ? true : false;
+        return 'Dark' === self::get_display_mode();
     }
 
     public static function set_display_mode(string $mode): void
     {
-        if (! self::is_valid_display_mode_setting((string) $mode)) {
+        if (! self::is_valid_display_mode_setting($mode)) {
             user_error('Setting must be Dark or Light');
         }
         $member = Security::getCurrentUser();
