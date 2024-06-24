@@ -26,7 +26,7 @@ class DarkThemePreference extends DataExtension
     {
         $fieldLabels = $this->getOwner()->fieldLabels();
         $fields->addFieldsToTab(
-            'Root.Cms',
+            'Root.Features',
             [
                 OptionsetField::create(
                     'DarkModeSetting',
