@@ -18,17 +18,22 @@ class LeftAndMainDarkTheme extends Extension
 {
     public const CUSTOM_CODE = 'DarkModeCustomCssAndJs';
 
+    // contrast(calc(1/0.95)) saturate(calc(1/0.5))
     private static $make_dark_css = '
-        html {
-            filter: invert(1) contrast(0.95) saturate(0.5) hue-rotate(180deg);
-        }
-        img,
-        .gallery-item__thumbnail,
-        iframe[name="cms-preview-iframe"],
-        .cms-help__links,
-        .uploadfield-item__thumbnail {
-            filter: invert(1) contrast(calc(1/0.95)) saturate(calc(1/0.5)) hue-rotate(-180deg);
-        }
+
+/* Apply dark theme to entire HTML */
+html {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Keep images and specific elements unchanged */
+img,
+.gallery-item__thumbnail,
+iframe[name="cms-preview-iframe"],
+.cms-help__links,
+.uploadfield-item__thumbnail {
+    filter: invert(1) hue-rotate(-180deg);
+}
     ';
 
     public function updateClientConfig(array $clientConfig)
