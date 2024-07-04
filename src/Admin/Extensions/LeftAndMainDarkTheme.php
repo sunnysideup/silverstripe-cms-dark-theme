@@ -2,6 +2,7 @@
 
 namespace Sunnysideup\CMSDarkTheme\Admin\Extensions;
 
+use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
