@@ -24,14 +24,19 @@ class LeftAndMainDarkTheme extends Extension
 
 /* Apply dark theme to entire HTML */
 html {
-    filter: invert(1) hue-rotate(180deg);
+    filter: invert(0.9) hue-rotate(180deg);
 }
 
 /* Keep images and specific elements unchanged */
 img,
 .gallery-item__thumbnail,
 iframe[name="cms-preview-iframe"],
+.btn-primary,
+.cms-content-loading-spinner,
 .cms-help__links,
+.cms-help__logo,
+.cms-menu__header,
+.ss-loading-screen__text,
 .uploadfield-item__thumbnail {
     filter: invert(1) hue-rotate(-180deg);
 }
