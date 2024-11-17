@@ -31,13 +31,19 @@ html {
 img,
 .gallery-item__thumbnail,
 iframe[name="cms-preview-iframe"],
+.badge-info,
 .btn-primary,
+.chosen-container .chosen-results li.highlighted,
 .cms-content-loading-spinner,
 .cms-content-loading-overlay,
 .cms-help__links,
 .cms-help__logo,
 .cms-menu__header,
+.cms-mobile-menu-toggle-wrapper,
+.modal-backdrop,
 .ss-loading-screen__text,
+.tox .tox-button:not(.tox-button--secondary),
+.tox .tox-sidebar-wrap,
 .uploadfield-item__thumbnail {
     filter: invert(1) hue-rotate(-180deg);
 }
