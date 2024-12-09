@@ -7,6 +7,10 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use Sunnysideup\CMSDarkTheme\Api\LeftAndMainDarkThemeApi;
 
+/**
+ * Class \Sunnysideup\CMSDarkTheme\Control\LeftAndMainDarkThemeToggle
+ *
+ */
 class LeftAndMainDarkThemeToggle extends Controller
 {
     private static $url_segment = 'admin/displaymode';
