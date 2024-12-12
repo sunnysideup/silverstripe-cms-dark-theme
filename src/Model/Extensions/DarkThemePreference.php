@@ -25,8 +25,18 @@ class DarkThemePreference extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fieldLabels = $this->getOwner()->fieldLabels();
+        $localeField = $fields->dataFieldByName('Locale');
+        if ($localeField) {
+            $fields->addFieldsToTab(
+                'Root.Preferences',
+                [
+                    $localeField
+                ]
+            );
+        }
+
         $fields->addFieldsToTab(
-            'Root.Features',
+            'Root.Preferences',
             [
                 OptionsetField::create(
                     'DarkModeSetting',
