@@ -44,8 +44,12 @@ iframe[name="cms-preview-iframe"],
 .ss-loading-screen__text,
 .tox .tox-button:not(.tox-button--secondary),
 .tox .tox-sidebar-wrap,
-.uploadfield-item__thumbnail {
+.uploadfield-item__thumbnail,
+.colorpalettefield * {
     filter: invert(1) hue-rotate(-180deg);
+}
+    fieldset.grid-field.ss-gridfield {
+ box-shadow: none !important;
 }
     ';
 
