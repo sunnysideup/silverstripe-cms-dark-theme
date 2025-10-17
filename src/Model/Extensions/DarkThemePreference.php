@@ -10,7 +10,7 @@ use SilverStripe\Core\Extension;
  * Class \Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference.
  *
  * @property SiteConfig|Member|DarkThemePreference $owner
- * @property string $DarkModeSetting
+ * @property ?string $DarkModeSetting
  */
 class DarkThemePreference extends Extension
 {
