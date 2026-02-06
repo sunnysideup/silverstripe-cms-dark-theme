@@ -9,7 +9,6 @@ use Sunnysideup\CMSDarkTheme\Api\LeftAndMainDarkThemeApi;
 
 /**
  * Class \Sunnysideup\CMSDarkTheme\Control\LeftAndMainDarkThemeToggle
- *
  */
 class LeftAndMainDarkThemeToggle extends Controller
 {

@@ -2,9 +2,9 @@
 
 namespace Sunnysideup\CMSDarkTheme\Model\Extensions;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Core\Extension;
 
 /**
  * Class \Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference.
@@ -34,7 +34,7 @@ class DarkThemePreference extends Extension
                 $fields->addFieldsToTab(
                     'Root.Preferences',
                     [
-                        $localeField
+                        $localeField,
                     ]
                 );
             }
