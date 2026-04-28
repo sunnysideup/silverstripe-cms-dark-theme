@@ -36,6 +36,7 @@ class LeftAndMainDarkThemeApi
         if (! self::is_valid_display_mode_setting($mode)) {
             user_error('Setting must be Dark or Light');
         }
+
         $member = Security::getCurrentUser();
         if ($member) {
             $member->DarkModeSetting = $mode;
@@ -53,6 +54,7 @@ class LeftAndMainDarkThemeApi
                 self::$darkModeSetInDatabaseCache = true;
                 self::$darkModeValueCache = (string) $member->DarkModeSetting;
             }
+
             $config = SiteConfig::current_site_config();
             if (self::is_valid_display_mode_setting((string) $config->DarkModeSetting)) {
                 self::$darkModeSetInDatabaseCache = true;
@@ -60,6 +62,7 @@ class LeftAndMainDarkThemeApi
                     self::$darkModeValueCache = (string) $config->DarkModeSetting;
                 }
             }
+
             if (! self::is_valid_display_mode_setting((string) self::$darkModeValueCache)) {
                 self::$darkModeValueCache = '';
             }

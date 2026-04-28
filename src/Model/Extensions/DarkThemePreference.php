@@ -2,6 +2,7 @@
 
 namespace Sunnysideup\CMSDarkTheme\Model\Extensions;
 
+use SilverStripe\Forms\FormField;
 use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\OptionsetField;
@@ -30,7 +31,7 @@ class DarkThemePreference extends Extension
         $owner = $this->getOwner();
         if ($owner->Config()->get('dark_theme_also_move_locale')) {
             $localeField = $fields->dataFieldByName('Locale');
-            if ($localeField) {
+            if ($localeField instanceof FormField) {
                 $fields->addFieldsToTab(
                     'Root.Preferences',
                     [
@@ -39,6 +40,7 @@ class DarkThemePreference extends Extension
                 );
             }
         }
+
         $description = _t(
             'Sunnysideup\CMSDarkTheme\Model\Extensions\DarkThemePreference.DarkModeSettingDescription',
             'Using a dark mode may reduce your electricity use. Please reload browser window to update your mode.'

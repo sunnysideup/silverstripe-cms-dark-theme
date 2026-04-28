@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sunnysideup\CMSDarkTheme\Admin\Extensions;
 
 use SilverStripe\Admin\LeftAndMain;
